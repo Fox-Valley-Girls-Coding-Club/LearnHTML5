@@ -1,0 +1,721 @@
+<!doctype>
+<html>
+	<head>
+    <title>CSS Animation</title>
+    <style>
+
+@font-face {
+  font-family: "Lemon";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Lemon Regular"), local("Lemon-Regular"), url("/packt/fonts/lemon.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Fredericka the Great";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Fredericka the Great"), local("FrederickatheGreat"), url("/packt/fonts/fredericka-the-great.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Mystery Quest";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Mystery Quest"), local("MysteryQuest"), url("/packt/fonts/mystery-quest.woff") format("woff");
+}
+    
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0997a0;
+      width: 100%;
+      height: 100%;
+    }
+
+    header {
+      -webkit-animation-duration: 42s;
+      -webkit-animation-name: sky;
+      -webkit-animation-direction: alternate;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-timing-function: ease-out;
+    }
+
+    header h1 {
+      text-align: center;
+      color: #900;
+      font-weight: 400;
+      font-size: 3.5em;
+      font-family: "Fredericka the Great", Arial, sans-serif;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 10px 0;
+      margin: 0;
+    }
+
+    footer {
+      text-align: center; 
+      position: absolute; 
+      bottom: 10px; 
+      left: 0; 
+      width: 100%; 
+      padding: 5px 0; 
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    #navOptions {
+      position: relative;
+      top: 10px;
+      left: -230px;
+      width: 325px;
+      overflow: auto;
+      padding: 10px;
+      border-radius: 0 10px 10px 0;
+      -webkit-transition: all 0.3s;
+    }
+
+    #navOptions.open {
+      left: 0;
+      background: rgba(100, 100, 100, 0.5);
+      padding-right: 15px;
+    }
+
+    #navOptions div {
+      float: left;
+      padding: 0 10px;
+      width: 200px;
+    }
+
+    #navOptions div p:first-child {
+      margin: 0 0 15px;
+      font-family: "Fredericka the Great", Arial, sans-serif;
+      font-size: 2em;
+      color: #333;
+    }
+
+    #navOptions div input {
+      cursor: pointer;
+      width: 100%;
+    }
+
+    #navOptions img {
+      float: right;
+    }
+
+    #navOptions img {
+      cursor: pointer;
+      opacity: 0.4;
+
+      -webkit-transition: opacity 0.25s;
+    }
+
+    #navOptions img:hover, #navOptions.open img {
+      opacity: 1.0;
+    }
+
+    #messageContainer {
+      width: 100%;
+      height: 0;
+      background: rgba(255, 255, 255, 0.75);
+      position: absolute;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      -webkit-transition: all 0.75s;
+    }
+
+    #messageContainer article {
+      width: 900px;
+      background: #0997a0;
+      margin: 50px auto 0;
+      box-shadow: 0 8px 42px #333;
+    }
+
+    #messageContainer article .closed {
+      display: none;
+    }
+
+    #messageContainer article h2 {
+      text-align: center;
+      color: #900;
+      font-weight: 400;
+      font-size: 3.5em;
+      font-family: Lemon, Arial, sans-serif;
+      width: 100%;
+      padding: 10px 0;
+      margin: 0;
+      background: #0997a0;
+      text-shadow: 2px 5px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    #messageContainer section {
+      padding: 20px;
+      max-height: 50%;
+      overflow: auto;
+      overflow-x: hidden;
+    }
+
+    #messageContainer input[type='text'], #messageContainer input[type='email'] {
+      padding: 5px;
+      font-size: 1.5em;
+      width: 325px;
+      margin-right: 20px;
+    }
+
+    #messageContainer input[type='submit'], button {
+      min-width: 100px;
+      font-size: 1.75em;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    #messageContainer ul {
+      list-style: none;
+      padding: 10px 0 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    #messageContainer li {
+      display: block;
+      overflow: auto;
+    }
+
+    #messageContainer li p {
+      font-size: 1.75em;
+      float: left;
+      margin: 5px;
+      font-family: "Mystery Quest", Arial, sans-serif;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 0.15em;
+    }
+
+    #messageContainer li a {
+      color: rgba(0, 0, 255, 0.5);
+    }
+
+    #messageContainer li p:nth-child(3) {
+      float: right;
+    }
+
+    #messageContainer.open {
+      height: 100%;
+    }
+
+    #mainContainer {
+      width: 90%;
+      padding: 0 5%;
+    }
+
+    #wordsToWrite {
+      font-size: 1.5em;
+      margin: 10px 0;
+      padding: 1%;
+      width: 98%;
+      background: rgba(10, 10, 10, 0.25);
+    }
+
+    #wordsWritten {
+      font-size: 1.5em;
+      margin: 10px 0;
+      padding: 1%;
+      width: 98%;
+    }
+
+    #wordsWritten .correct {
+      color: #fff;
+    }
+
+    #wordsWritten .wrong {
+      text-decoration: line-through;
+      color: #900;
+    }
+
+    .tracks {
+      width: 800px;
+      margin: 25px 25px -205px;
+      padding: 32px;
+    }
+
+    .tracks .track {
+      background: #888;
+      width: 100%;
+      height: 15px;
+      position: relative;
+      margin: 0 0 64px;
+      border-radius: 25px;
+      box-shadow: inset 0 0 3px #000;
+      border-bottom: 1px solid #fff;
+    }
+
+    .tracks .track:last-child {
+      margin: 0;
+    }
+
+    .track span {
+      position: absolute;
+      top: -25px;
+      left: 0;
+      width: 64px;
+      height: 64px;
+      -webkit-transition: left 0.10s;
+    }
+
+    .track span[data-name='goodGuy'] {
+      background: url("img/good-guy-icon.png") no-repeat;
+    }
+
+    .track span[data-name='badGuy'] {
+      background: url("img/bad-guy-icon.png") no-repeat;
+    }
+        
+    .ocean {
+      width: 100%;
+      height: 350px;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #boat {
+      width: 310px;
+      height: 310px;
+      background: url("img/dream-boat.png") no-repeat;
+      position: absolute;
+
+      -webkit-animation-duration: 3s;
+      -webkit-animation-name: boat;
+      -webkit-animation-direction: alternate;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-timing-function: ease;
+    }
+
+    .wave {
+      width: 100%;
+      height: 150px;
+      padding 0;
+      margin: 0;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+
+    
+    .wave-blue {
+      background: url("img/wave-02.png") repeat-x;
+      
+      -webkit-animation-duration: 5s;
+      -webkit-animation-name: wave;
+      -webkit-animation-direction: alternate;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-timing-function: linear;
+    }
+    
+    .wave-light {
+      background: url("img/wave-01.png") repeat-x;
+      
+      -webkit-animation-duration: 10s;
+      -webkit-animation-name: wave;
+      -webkit-animation-direction: alternate;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-timing-function: linear;
+    }
+
+    @-webkit-keyframes boat {
+      from {
+        bottom: 50px;
+        right: 80px;
+      }
+
+
+      50% {
+        bottom: 30px;
+        right: 60px;
+      }
+
+      to {
+        bottom: 10px;
+        right: 100px;
+        -webkit-animation-timing-function: linear;
+      }
+    }
+    
+    @-webkit-keyframes wave {
+      0% {
+        background-position-x: 0;
+        background-position-y: 0; 
+      }
+      
+      20% {
+        background-position-x: 100px;
+        background-position-y: 30px;
+      }
+      
+      40% {
+        background-position-x: 200px;
+        background-position-y: 0;
+      }
+      
+      60% {
+        background-position-x: 100px;
+        background-position-y: 30px;
+      }
+      
+      80% {
+        background-position-x: 0;
+        background-position-y: 0;
+      }
+
+      100% {
+        background-position-x: -150px;
+        background-position-y: 20px;
+      }
+    }
+    
+    @-webkit-keyframes sky {
+      from {
+        background: #ccf;
+      }
+      
+      to {
+        background: #eef; /* #225; */
+      }
+    }
+    </style>
+	</head>
+  <body>
+
+  <header>
+
+    <h1>Typography Game</h1>
+
+    <nav id="navOptions">
+      <div>
+        <p>Difficulty &raquo; <span>1</span></p>
+        <input type="range" step="1" min="1" max="3" value="1" />
+      </div>
+      <img src="img/options-icon.png" />
+    </nav>
+
+    <section class="tracks">
+      <div class="track">
+        <span data-name="badGuy" data-speed="0"></span>
+      </div>
+
+      <div class="track">
+        <span data-name="goodGuy" data-speed="0"></span>
+      </div>
+    </section>
+
+    <section class="ocean">
+      <div class="wave wave-light"></div>  
+      <div id="boat"></div>
+      <div class="wave wave-blue"></div>
+    </section>
+  </header>
+ 
+  <section id="mainContainer">
+    <div id="wordsToWrite"></div>
+    <div id="wordsWritten"></div>
+    <button data-intent="play">Play</button>    
+  </section>
+
+  <section id="messageContainer">
+
+    <article>
+      <header>
+        <h2>Message Header Goes Here</h2>
+      </header>
+      <section class="closed">
+<form>
+  <input type="text" name="fullName" pattern="\w{2,16}\s\w{2,16}" placeholder="Full Name (Ex: John Doe)" autofocus />
+  <input type="email" name="email" placeholder="Email address" />
+  <input type="submit" value="Save" />
+</form>
+
+<ul></ul>
+
+<button data-intent="play">Play Again</button>
+      </section>
+    
+    </article>
+
+  </section>
+
+
+<script>
+
+function Player(query) {
+  var element = document.querySelector(query);
+  var trackWidth = parseInt(element.parentElement.offsetWidth);
+  var minLeft = 0 - parseInt(element.offsetWidth / 2);
+  var maxLeft = trackWidth - parseInt(element.offsetWidth / 2);
+
+  function getLeft() {
+    return parseInt(element.style.left);
+  }
+
+  this.getMinLeft = function() {
+    return minLeft;
+  };
+
+  this.getMaxLeft = function() {
+    return maxLeft;
+  };
+
+  this.move = function() {
+    var left = getLeft();
+    var speed = parseInt(element.attributes.getNamedItem("data-speed").value);
+
+    element.style.left = (left + speed) + "px";
+
+    if (getLeft() > maxLeft) {
+      this.moveToFinish();
+    } else if (getLeft() < minLeft) {
+      this.moveToStart();
+    }
+  };
+
+  this.moveToPercent = function(percent) {
+    element.style.left = parseInt(percent * maxLeft) + "px";
+
+    if (percent >= 100) {
+      this.moveToFinish();
+    } else if (percent <= 0) {
+      this.moveToStart();
+    }
+  };
+
+  this.isFinished = function() {
+    return parseInt(element.style.left) >= maxLeft;
+  };
+
+  this.moveToStart = function() {
+    element.style.left = this.getMinLeft() + "px";
+  };
+
+  this.moveToFinish = function() {
+    element.style.left = this.getMaxLeft() + "px";
+  };
+
+  this.setSpeed = function(speed) {
+    return element.attributes.getNamedItem("data-speed").value = speed;
+  };
+}
+
+var hero = new Player("[data-name='goodGuy']");
+var enemy = new Player("[data-name='badGuy']");
+
+var tickPeriod = 500;
+var gamesWon = 0;
+
+var wordsToWrite = document.querySelector("#wordsToWrite");
+var wordsWritten = document.querySelector("#wordsWritten");
+var words = "";
+var currentLetter = 0;
+
+function isGameOver() {
+  return hero.isFinished() || enemy.isFinished();
+}
+
+function tick() {
+
+  hero.move();
+  enemy.move();
+
+  if (isGameOver()) {
+    document.body.removeEventListener("keydown", handleKeyPress);
+
+    if (hero.isFinished()) {
+      gamesWon++;
+      showWinPanel();
+    } else if (enemy.isFinished()) {
+      showLosePanel();
+    }
+  } else {
+    setTimeout(tick, tickPeriod);
+  }
+}
+
+function showWinPanel() {
+  var panel = document.querySelector("#messageContainer");
+  var leaderboard = document.querySelector("#messageContainer article section");
+  var championForm = document.querySelector("#messageContainer form");
+  var header = document.querySelector("#messageContainer h2");
+
+  header.innerText = "You win the boat!";
+
+  panel.classList.add("open");
+
+  setTimeout(function(){
+    championForm.classList.remove("closed");
+    leaderboard.classList.remove("closed");
+  }, 3000);
+}
+
+function showLosePanel() {
+  var panel = document.querySelector("#messageContainer");
+  var leaderboard = document.querySelector("#messageContainer article section");
+  var championForm = document.querySelector("#messageContainer form");
+  var header = document.querySelector("#messageContainer h2");
+
+  header.innerText = "You lose. Try gain.";
+
+  panel.classList.add("open");
+
+  setTimeout(function(){
+    leaderboard.classList.remove("closed");
+    championForm.classList.add("closed");
+  }, 3000);
+}
+
+function saveNewChampion(event) {
+  event.preventDefault();
+
+  var name = this.elements.namedItem("fullName").value;
+  var email = this.elements.namedItem("email").value;
+
+  var champions = document.querySelector("#messageContainer ul");
+  var rank = champions.children.length + 1;
+  var difficulty = document.querySelector("#navOptions input[type='range']").value;
+
+  var stars = "";
+  for (var i = 0; i < difficulty; i++)
+    stars += "*";
+
+  if (rank > gamesWon)
+    return false;
+
+  var newChampion = document.createElement("li");
+  newChampion.innerHTML = "<p>#" + rank + "</p>" +
+                          "<p>" + name + " " + stars + "</p>" +
+                          "<p><a href='mailto:" + email + "'>" + email + "</a></p>";
+
+  champions.appendChild(newChampion);
+}
+
+function setEnemySpeed(speed) {
+  enemy.setSpeed(speed * 23);
+}
+
+function handleKeyPress(event) {
+
+  var wordsLen = wordsWritten.children.length;
+  if (event.keyCode == 16)
+    return false;
+
+  if (event.keyCode == 8) {
+    event.preventDefault();
+    
+    if (wordsLen < 1)
+      return false;
+
+    wordsWritten.children[wordsLen - 1].remove();
+    return false;
+  }
+
+  var letter = String.fromCharCode(event.keyCode);
+
+  if (!event.shiftKey && event.keyCode >= 65 && event.keyCode <= 90)   
+      letter = String.fromCharCode(event.keyCode + 32);
+
+  if (event.keyCode == 188)
+    letter = ",";
+
+  if (event.keyCode == 190)
+    letter = ".";
+
+  if (letter == words[wordsLen]) {
+    wordsWritten.innerHTML += "<span class='correct'>" + letter + "</span>";
+    var correct = document.querySelectorAll("#wordsWritten .correct").length;
+    var percent = correct / words.length;
+    hero.moveToPercent(percent);
+  } else {
+    wordsWritten.innerHTML += "<span class='wrong'>" + letter + "</span>";
+  }
+
+  return false;
+}
+
+
+function getWords() {
+  var phrases = [
+      "The quick brown fox stopped being quick once its hunter started wearing chrome.",
+      "I must win my dream boat before the snaughty Mr. Snaughtington takes it from me.",
+      "I love HTML5 because it is such an amazing platform to develop games in.",
+      "People who type fast are more likely to win at this game. Yes, that is true.",
+      "For some reason, I think I can have fun while typing, and improving at the same time."];
+  var rand = parseInt(Math.random() * phrases.length);
+
+  return phrases[rand];
+}
+
+function doOnPlayClicked() {
+  var panel = document.querySelector("#messageContainer");
+  var leaderboard = document.querySelector("#messageContainer article section");
+  var championForm = document.querySelector("#messageContainer form");
+  var difficulty = document.querySelector("#navOptions input[type='range']");
+  var playBtn = document.querySelector("#mainContainer button[data-intent='play']");
+
+  words = getWords();
+  wordsToWrite.innerText = words;
+  wordsWritten.innerText = "";
+
+  currentLetter = 0;
+
+  if (playBtn)
+    playBtn.remove();
+
+  panel.classList.remove("open");
+  leaderboard.classList.add("closed");
+  championForm.classList.add("closed");
+  
+  hero.moveToStart();
+  enemy.moveToStart();
+  setEnemySpeed(difficulty.value);
+  hero.setSpeed(0);
+
+  document.body.addEventListener("keydown", handleKeyPress);
+  setTimeout(tick, tickPeriod);
+}
+
+function main() {
+  // Make options navigation toggle when clicked
+  var options = document.querySelector("#navOptions img");
+  options.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    if (options.parentElement.classList.contains("open"))
+      options.parentElement.classList.remove("open");
+    else
+      options.parentElement.classList.add("open");
+  });
+
+  // Update difficulty value when slider changes
+  var difficulty = document.querySelector("#navOptions input[type='range']");
+  difficulty.addEventListener("change", function(event) {
+    event.preventDefault();
+
+    var difficultyIndicator = document.querySelector("#navOptions div p span");
+    difficultyIndicator.innerText = this.value;
+
+    setEnemySpeed(this.value);
+  });
+
+  // Handle new champion submission
+  var newChampionForm = document.querySelector("#messageContainer form");
+  newChampionForm.addEventListener("submit", saveNewChampion);
+
+  var playBtn = document.querySelectorAll("button[data-intent='play']");
+
+  for (var i = 0, len = playBtn.length; i < len; i++)
+    playBtn[i].addEventListener("click", doOnPlayClicked);
+}
+
+main();
+</script>
+  
+  </body>
+</html>
