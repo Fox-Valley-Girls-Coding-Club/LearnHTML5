@@ -224,19 +224,22 @@ var jellyModel = document.querySelector(".jelly-model");
 var jellies = [];
 var MAX_JELLIES = 50;
 var jellyHP = 5.75;
+var score = 0;
 var hitFloor = false;
 
 var health = document.querySelector(".health-bar span");
 health.sickLevel = 100;
-
+var scoreDisplay = document.querySelector("#score");
 var dude = document.querySelector(".dude-svg").cloneNode(true);
 dude.isDead = false;
 dude.isMoving = { left: false, right: false };
 dude.pos = { x: 0, moveBy: 11.75 };
 document.body.appendChild(dude);
 
+
+
 // ------------------------------------------------------------
-// 
+// This is where my game starts
 // ------------------------------------------------------------
 function startGame() {
 
@@ -319,7 +322,8 @@ function tick() {
 
    // Only try to move the hero if game is still running
    if (!dude.isDead) {
-
+      score += 1;
+      scoreDisplay.innerHTML = score;
       // Move dude to the right
       /* FVGCC:  offsetWidth is not a valid property of an SVG element, so dude.offsetWidth is undefined;
                  modified to use the width of the containing box instead
