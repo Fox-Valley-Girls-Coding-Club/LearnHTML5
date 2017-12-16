@@ -36,7 +36,8 @@ var renderTime = {
    last: 0, 
    now: 0, 
    //fps: 1000 / 30
-   fps: 7000 / 30
+   //this makes it faster
+   fps: 6000 / 30
 };
 
 var snake = new Snake(0, 0, canvas.width, canvas.height, 1000);
@@ -149,6 +150,10 @@ function gameLoop() {
 
             if (fruit.isAt(head.x, head.y)) {
                fruit.reset();
+               snake.grow();
+               score.up();
+               snake.grow();
+               score.up();
                snake.grow();
                score.up();
             }
