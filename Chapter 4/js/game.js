@@ -277,7 +277,7 @@ function startGame() {
 // ------------------------------------------------------------
 function stopGame() {
    var message = document.querySelector("#message");
-   message.innerText = "Game Over!";
+   message.innerText = "Game Over! Your Awesome Score: " + score;
    message.style.opacity = 1.0;
    message.classList.add("messageShadow");
 }

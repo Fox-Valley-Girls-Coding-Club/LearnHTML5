@@ -132,8 +132,10 @@ var Snake = function(x, y, width, height, maxSize) {
    };
 
    this.grow = function() {
-      if (size * 2 < body.length)
-        return size++;
+      if (size * 2 < body.length){
+        size = size + 2;
+        return size;
+      }
    };
 
    this.reset = function(x, y) {

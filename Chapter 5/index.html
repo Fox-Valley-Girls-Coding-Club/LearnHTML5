@@ -35,7 +35,8 @@ var renderer = new Renderer(canvas);
 var renderTime = {
    last: 0, 
    now: 0, 
-   fps: 1000 / 30
+   //fps: 1000 / 30
+   fps: 7000 / 30
 };
 
 var snake = new Snake(0, 0, canvas.width, canvas.height, 1000);
@@ -142,9 +143,9 @@ function gameLoop() {
             snake.move();
             head = snake.getHead();
 
-            if (snake.isAt(head.x, head.y, false) || head.x < 0 || head.y < 0 || head.x >= worldWidth || head.y >= worldHeight) {
-               snake.setDead(true);
-            }
+            //if (snake.isAt(head.x, head.y, false) || head.x < 0 || head.y < 0 || head.x >= worldWidth || head.y >= worldHeight) {
+               //snake.setDead(true);
+            //}
 
             if (fruit.isAt(head.x, head.y)) {
                fruit.reset();
